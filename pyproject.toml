@@ -1,5 +1,5 @@
 [tool.poetry]
-name = "Andrka_gendiff"
+name = "Andrka-gendiff"
 version = "0.1.0"
 description = ""
 authors = ["Andrka <postbox4mail@gmail.com>"]
