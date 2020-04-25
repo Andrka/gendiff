@@ -7,9 +7,11 @@ import json
 
 def print_result(diff_result: str):
     """Print taken result."""
-    print('\n', diff_result, sep='')  # noqa: WPS421
+    print('\n', diff_result, sep='')
 
 
-def open_json(path_to_file: str) -> dict:
+def open_json_file(path_to_file: str) -> dict:
     """Open json file."""
-    return json.load(open(path_to_file))  # noqa: WPS515
+    with open('{0}'.format(path_to_file), 'r') as json_file:
+        data_from_json_file = json.load(json_file)
+    return data_from_json_file
