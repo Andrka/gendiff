@@ -13,7 +13,7 @@ def generate_diff(path_to_first_file: str, path_to_second_file: str) -> str:
     diff_result = ['{']
     for key in keys:
         diff_result.append(
-            generate_diff_string(
+            generate_diff_by_key(
                 key,
                 first_file.get(key),
                 second_file.get(key),
@@ -23,11 +23,11 @@ def generate_diff(path_to_first_file: str, path_to_second_file: str) -> str:
     return '\n'.join(diff_result)
 
 
-def generate_diff_string(key: str, first_value, second_value) -> str:
-    """Generate and return diff string."""
-    if first_value and not second_value:
+def generate_diff_by_key(key: str, first_value, second_value) -> str:
+    """Generate and return diff by given key."""
+    if (first_value is not None) and (second_value is None):
         return '  - {0}: {1}'.format(key, first_value)
-    if not first_value and second_value:
+    if (first_value is None) and (second_value is not None):
         return '  + {0}: {1}'.format(key, second_value)
     if first_value == second_value:
         return '    {0}: {1}'.format(key, first_value)

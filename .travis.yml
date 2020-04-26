@@ -8,4 +8,4 @@ install:
   - make install
 
 script:
-  - make lint
+  - make check
