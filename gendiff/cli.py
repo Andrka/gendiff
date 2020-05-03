@@ -2,7 +2,7 @@
 
 """Realize command line interface."""
 
-import json
+import argparse
 
 
 def print_result(diff_result: str):
@@ -10,15 +10,10 @@ def print_result(diff_result: str):
     print('\n', diff_result, sep='')
 
 
-def open_json_file(path_to_file: str) -> dict:
-    """Open json file."""
-    with open('{0}'.format(path_to_file), 'r') as json_file:
-        data_from_json_file = json.load(json_file)
-    return data_from_json_file
-
-
-def open_txt_file(path_to_file: str) -> str:
-    """Open txt file."""
-    with open('{0}'.format(path_to_file), 'r') as txt_file:
-        data_from_txt_file = txt_file.read()
-    return data_from_txt_file
+def parse_arguments():
+    """Take and return command line arguments."""
+    parser = argparse.ArgumentParser(description='Generate diff')
+    parser.add_argument('-f', '--format', help='set format of output')
+    parser.add_argument('first_file')
+    parser.add_argument('second_file')
+    return parser.parse_args()

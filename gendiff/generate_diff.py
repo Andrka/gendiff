@@ -2,13 +2,13 @@
 
 """Find diff."""
 
-from gendiff import cli
+from gendiff import file_loader
 
 
 def generate_diff(path_to_first_file: str, path_to_second_file: str) -> str:
-    """Generate and return diff between two .json files."""
-    first_file = cli.open_json_file(path_to_first_file)
-    second_file = cli.open_json_file(path_to_second_file)
+    """Generate and return diff between two files."""
+    first_file = file_loader.open_file(path_to_first_file)
+    second_file = file_loader.open_file(path_to_second_file)
     keys = set(first_file.keys()) | set(second_file.keys())
     diff_result = ['{']
     for key in keys:
