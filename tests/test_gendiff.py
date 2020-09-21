@@ -17,18 +17,17 @@ def test_main(capfd):
     ]
     main()
     out, err = capfd.readouterr()
-    diff = set(out[1:-1].split('\n'))
-    test_diff = set(open_file('tests/fixtures/diff.txt').split('\n'))
-    assert diff == test_diff
+    test_diff = set(out[1:-1].split('\n'))
+    sample_diff = set(open_file('tests/fixtures/diff.txt').split('\n'))
+    assert sample_diff == test_diff
     assert err == ''
     sys.argv = [
         'test2',
-        'tests/fixtures/before.yaml',
-        'tests/fixtures/after.yaml',
+        'tests/fixtures/before.yml',
+        'tests/fixtures/after.yml',
     ]
     main()
     out, err = capfd.readouterr()
-    diff = set(out[1:-1].split('\n'))
-    test_diff = set(open_file('tests/fixtures/diff.txt').split('\n'))
-    assert diff == test_diff
+    test_diff = set(out[1:-1].split('\n'))
+    assert sample_diff == test_diff
     assert err == ''

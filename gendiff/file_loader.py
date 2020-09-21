@@ -12,7 +12,7 @@ def open_file(path_to_file: str):
     file_types = {
         'json': open_json_file,
         'txt': open_txt_file,
-        'yaml': open_yaml_file,
+        'yml': open_yaml_file,
     }
     file_extension = ''
     for letter in path_to_file[::-1]:
