@@ -16,12 +16,12 @@ Before you start, you will need Python and pip on your computer. To install "Gen
 
 To start this utility after installation, print and run in the terminal:
 
-`gendiff first_json_file second_json_file`
+`gendiff first_json_file.json second_json_file.json`
 
 [![asciicast](https://asciinema.org/a/EDCYxv4F9fS2IvCnuFsQmgfN8.svg)](https://asciinema.org/a/EDCYxv4F9fS2IvCnuFsQmgfN8)
 
 or
 
-`gendiff first_yaml_file second_yaml_file`
+`gendiff first_yaml_file.yml second_yaml_file.yml`
 
 [![asciicast](https://asciinema.org/a/fFnj6kIesKA78XSysotnviAfs.svg)](https://asciinema.org/a/fFnj6kIesKA78XSysotnviAfs)
