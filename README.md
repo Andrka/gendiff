@@ -10,18 +10,18 @@ Before you start, you will need Python and pip on your computer. To install "Gen
 
 `pip install --user -i https://test.pypi.org/simple andrka-gendiff --extra-index-url https://pypi.org/simple`
 
-[![asciicast](https://asciinema.org/a/2fTQ7gmDrbfDQgR2exZGKjoLY.svg)](https://asciinema.org/a/2fTQ7gmDrbfDQgR2exZGKjoLY)
+[![asciicast](https://asciinema.org/a/5zVEQ0HD8wJ2Gh2oJBghZ2Yzz.svg)](https://asciinema.org/a/5zVEQ0HD8wJ2Gh2oJBghZ2Yzz)
 
 #### Start utility:
 
 To start this utility after installation, print and run in the terminal:
 
-`gendiff first_json_file second_json_file`
+`gendiff first_json_file.json second_json_file.json`
 
-[![asciicast](https://asciinema.org/a/EDCYxv4F9fS2IvCnuFsQmgfN8.svg)](https://asciinema.org/a/EDCYxv4F9fS2IvCnuFsQmgfN8)
+[![asciicast](https://asciinema.org/a/u3JvS82zTSWRtC5DEnyjnD9ai.svg)](https://asciinema.org/a/u3JvS82zTSWRtC5DEnyjnD9ai)
 
 or
 
-`gendiff first_yaml_file second_yaml_file`
+`gendiff first_yaml_file.yml second_yaml_file.yml`
 
-[![asciicast](https://asciinema.org/a/fFnj6kIesKA78XSysotnviAfs.svg)](https://asciinema.org/a/fFnj6kIesKA78XSysotnviAfs)
+[![asciicast](https://asciinema.org/a/dftuzIBseoRNiT1svBRICO0UH.svg)](https://asciinema.org/a/dftuzIBseoRNiT1svBRICO0UH)

@@ -16,40 +16,104 @@ before = {
         'setting3': True,
         'setting6': {
             'key': 'value',
+            'doge': {
+                'wow': 'too much',
+            },
         },
     },
     'group1': {
         'baz': 'bas',
         'foo': 'bar',
+        'nest': {
+            'key': 'value',
+        },
     },
     'group2': {
         'abc': 12345,
+        'deep': {
+            'id': 45,
+        },
     },
 }
 after = {
     'common': {
+        'follow': False,
         'setting1': 'Value 1',
-        'setting3': True,
+        'setting3': {
+            'key': 'value',
+        },
         'setting4': 'blah blah',
         'setting5': {
             'key5': 'value5',
+        },
+        'setting6': {
+            'key': 'value',
+            'ops': 'vops',
+            'doge': {
+                'wow': 'so much',
+            },
         },
     },
     'group1': {
         'foo': 'bar',
         'baz': 'bars',
+        'nest': 'str',
     },
     'group3': {
         'fee': 100500,
+        'deep': {
+            'id': {
+                'number': 45,
+            },
+        },
     },
 }
-diff_in_str = """{\n    common: {
-        setting1: Value 1\n      - setting2: 200\n        setting3: true
-      - setting6: {\n            key: value\n        }
-      + setting4: blah blah\n      + setting5: {\n            key5: value5
-        }\n    }\n    group1: {\n      + baz: bars\n      - baz: bas
-        foo: bar\n    }\n  - group2: {\n        abc: 12345\n    }
-  + group3: {\n        fee: 100500\n    }\n}"""
+diff_in_str = """{
+    common: {
+      + follow: false
+        setting1: Value 1
+      - setting2: 200
+      - setting3: true
+      + setting3: {
+            key: value
+        }
+      + setting4: blah blah
+      + setting5: {
+            key5: value5
+        }
+        setting6: {
+            doge: {
+              - wow: too much
+              + wow: so much
+            }
+            key: value
+          + ops: vops
+        }
+    }
+    group1: {
+      - baz: bas
+      + baz: bars
+        foo: bar
+      - nest: {
+            key: value
+        }
+      + nest: str
+    }
+  - group2: {
+        abc: 12345
+        deep: {
+            id: 45
+        }
+    }
+  + group3: {
+        fee: 100500
+        deep: {
+            id: {
+                number: 45
+            }
+        }
+    }
+}"""
 before_json_path = 'tests/fixtures/before.json'
 after_json_path = 'tests/fixtures/after.json'
 result_path = 'tests/fixtures/diff.txt'
