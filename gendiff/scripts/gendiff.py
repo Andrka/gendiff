@@ -10,7 +10,13 @@ from gendiff.generate_diff import generate_diff_for_print
 def main():
     """Generate diff."""
     args = parse_arguments()
-    print_result(generate_diff_for_print(args.first_file, args.second_file))
+    print_result(
+        generate_diff_for_print(
+            args.first_file,
+            args.second_file,
+            args.format,
+        ),
+    )
 
 
 if __name__ == '__main__':

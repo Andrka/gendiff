@@ -4,20 +4,22 @@
 
 from gendiff.constants import ADDED, CHANGED, DELETED, NESTED, SAME
 from gendiff.file_loader import open_file
-from gendiff.formatters.json_like_format import (
-    prepare_diff_to_json_like_format,
-)
+from gendiff.formatters.json_like_format import prepare_to_json_like_format
+from gendiff.formatters.plain_format import prepare_to_plain_format
 
 
 def generate_diff_for_print(
     path_to_first_file: str,
     path_to_second_file: str,
+    print_format: str = 'json_like',
 ) -> str:
-    """Generate and return in str format diff between two files."""
+    """Generate and return diff between two files."""
     first_file = open_file(path_to_first_file)
     second_file = open_file(path_to_second_file)
     diff = create_diff(first_file, second_file)
-    return prepare_diff_to_json_like_format(diff)
+    if print_format == 'plain':
+        return prepare_to_plain_format(diff)
+    return prepare_to_json_like_format(diff)
 
 
 def create_diff(first_file: dict, second_file: dict) -> dict:  # noqa: WPS231

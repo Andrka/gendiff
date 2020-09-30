@@ -18,7 +18,9 @@ def test_main(capfd):
     main()
     out, err = capfd.readouterr()
     test_diff = set(out[1:-1].split('\n'))
-    sample_diff = set(open_file('tests/fixtures/diff.txt').split('\n'))
+    sample_diff = set(
+        open_file('tests/fixtures/diff_json_like.txt').split('\n'),
+    )
     assert sample_diff == test_diff
     assert err == ''
     sys.argv = [

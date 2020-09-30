@@ -3,22 +3,10 @@
 """Generate json-like text diff between two files."""
 
 from gendiff.constants import ADDED, CHANGED, DELETED, INDENT, SAME
+from gendiff.formatters.converter import convert_to_json_veiw
 
 
-def convert_to_json_veiw(key_value) -> str:
-    """Convert given python value to json veiw."""
-    transformations = {
-        True: 'true',
-        False: 'false',
-        None: 'null',
-    }
-    transformation = transformations.get(key_value)
-    if (transformation):
-        return transformation
-    return key_value
-
-
-def prepare_diff_to_json_like_format(  # noqa: WPS231
+def prepare_to_json_like_format(  # noqa: WPS231
     diff: dict,
     level_of_indent: int = 0,
 ) -> str:
@@ -31,7 +19,7 @@ def prepare_diff_to_json_like_format(  # noqa: WPS231
                     diff_in_str,
                     INDENT * level_of_indent,  # noqa: WPS204
                     key,
-                    prepare_diff_to_json_like_format(  # noqa: WPS204
+                    prepare_to_json_like_format(  # noqa: WPS204
                         key_parameter[1],
                         level_of_indent + 1,  # noqa: WPS204
                     ) if isinstance(
@@ -45,7 +33,7 @@ def prepare_diff_to_json_like_format(  # noqa: WPS231
                     diff_in_str,
                     INDENT * level_of_indent,
                     key,
-                    prepare_diff_to_json_like_format(
+                    prepare_to_json_like_format(
                         key_parameter[1],
                         level_of_indent + 1,
                     ) if isinstance(
@@ -59,7 +47,7 @@ def prepare_diff_to_json_like_format(  # noqa: WPS231
                     diff_in_str,
                     INDENT * level_of_indent,
                     key,
-                    prepare_diff_to_json_like_format(
+                    prepare_to_json_like_format(
                         key_parameter[1],
                         level_of_indent + 1,
                     ) if isinstance(
@@ -73,7 +61,7 @@ def prepare_diff_to_json_like_format(  # noqa: WPS231
                     diff_in_str,
                     INDENT * level_of_indent,
                     key,
-                    prepare_diff_to_json_like_format(
+                    prepare_to_json_like_format(
                         key_parameter[1],
                         level_of_indent + 1,
                     ) if isinstance(
@@ -82,7 +70,7 @@ def prepare_diff_to_json_like_format(  # noqa: WPS231
                     ) else convert_to_json_veiw(key_parameter[1]),
                     INDENT * level_of_indent,
                     key,
-                    prepare_diff_to_json_like_format(
+                    prepare_to_json_like_format(
                         key_parameter[2],
                         level_of_indent + 1,
                     ) if isinstance(
@@ -95,7 +83,7 @@ def prepare_diff_to_json_like_format(  # noqa: WPS231
                 diff_in_str,
                 INDENT * level_of_indent,
                 key,
-                prepare_diff_to_json_like_format(
+                prepare_to_json_like_format(
                     key_parameter[1],
                     level_of_indent + 1,
                 ),
@@ -105,7 +93,7 @@ def prepare_diff_to_json_like_format(  # noqa: WPS231
                 diff_in_str,
                 INDENT * level_of_indent,
                 key,
-                prepare_diff_to_json_like_format(
+                prepare_to_json_like_format(
                     key_parameter,
                     level_of_indent + 1,
                 ) if isinstance(

@@ -68,7 +68,7 @@ after = {
         },
     },
 }
-diff_in_str = """{
+diff_json_like = """{
     common: {
       + follow: false
         setting1: Value 1
@@ -114,9 +114,21 @@ diff_in_str = """{
         }
     }
 }"""
+diff_plain = """Property 'common.follow' was added with value: false
+Property 'common.setting2' was removed
+Property 'common.setting3' was updated. From true to [complex value]
+Property 'common.setting4' was added with value: 'blah blah'
+Property 'common.setting5' was added with value: [complex value]
+Property 'common.setting6.doge.wow' was updated. From 'too much' to 'so much'
+Property 'common.setting6.ops' was added with value: 'vops'
+Property 'group1.baz' was updated. From 'bas' to 'bars'
+Property 'group1.nest' was updated. From [complex value] to 'str'
+Property 'group2' was removed
+Property 'group3' was added with value: [complex value]"""
 before_json_path = 'tests/fixtures/before.json'
 after_json_path = 'tests/fixtures/after.json'
-result_path = 'tests/fixtures/diff.txt'
+result_json_like = 'tests/fixtures/diff_json_like.txt'
+result_plain = 'tests/fixtures/diff_plain.txt'
 before_yaml_path = 'tests/fixtures/before.yml'
 after_yaml_path = 'tests/fixtures/after.yml'
 
@@ -125,7 +137,8 @@ def test_open_file():
     """Test open_file function."""
     assert open_file(before_json_path) == before
     assert open_file(after_json_path) == after
-    assert open_file(result_path) == diff_in_str
+    assert open_file(result_json_like) == diff_json_like
+    assert open_file(result_plain) == diff_plain
     assert open_file(before_yaml_path) == before
     assert open_file(after_yaml_path) == after
 
@@ -138,7 +151,8 @@ def test_open_json_file():
 
 def test_open_txt_file():
     """Test open_txt_file function."""
-    assert open_txt_file(result_path) == diff_in_str
+    assert open_txt_file(result_json_like) == diff_json_like
+    assert open_txt_file(result_plain) == diff_plain
 
 
 def test_open_yaml_file():

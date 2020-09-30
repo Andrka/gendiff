@@ -8,7 +8,7 @@ from gendiff.generate_diff import create_diff, generate_diff_for_print
 diff = open_file('tests/fixtures/diff.json')
 before_json_path = 'tests/fixtures/before.json'
 after_json_path = 'tests/fixtures/after.json'
-result_path = 'tests/fixtures/diff.txt'
+result_path = 'tests/fixtures/diff_json_like.txt'
 before_yaml_path = 'tests/fixtures/before.yml'
 after_yaml_path = 'tests/fixtures/after.yml'
 
