@@ -14,11 +14,7 @@ def open_file(path_to_file: str):
         'txt': open_txt_file,
         'yml': open_yaml_file,
     }
-    file_extension = ''
-    for letter in path_to_file[::-1]:
-        if letter == '.':
-            break
-        file_extension = '{0}{1}'.format(letter, file_extension)
+    file_extension = path_to_file.split('.')[-1]
     return file_types[file_extension](path_to_file)
 
 

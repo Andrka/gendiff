@@ -11,4 +11,6 @@ result_path = 'tests/fixtures/diff_plain.txt'
 
 def test_prepare_to_plain_format():
     """Test prepare_to_plain_format function."""
-    pass
+    sample_diff = set(open_file(result_path).split('\n'))
+    test_diff = set(prepare_to_plain_format(diff).split('\n'))
+    assert sample_diff == test_diff

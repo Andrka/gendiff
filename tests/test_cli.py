@@ -18,10 +18,31 @@ def test_print_result(capfd):
 def test_parse_arguments():
     """Test parse_arguments function."""
     sys.argv = [
-        'test',
+        'test1',
         'first',
         'second',
     ]
     args = parse_arguments()
+    assert args.format is None
+    assert args.first_file == 'first'
+    assert args.second_file == 'second'
+    sys.argv = [
+        'test2',
+        '-fjson_like',
+        'first',
+        'second',
+    ]
+    args = parse_arguments()
+    assert args.format == 'json_like'
+    assert args.first_file == 'first'
+    assert args.second_file == 'second'
+    sys.argv = [
+        'test3',
+        '-fplain',
+        'first',
+        'second',
+    ]
+    args = parse_arguments()
+    assert args.format == 'plain'
     assert args.first_file == 'first'
     assert args.second_file == 'second'

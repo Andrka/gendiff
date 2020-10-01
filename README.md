@@ -10,7 +10,7 @@ Before you start, you will need Python and pip on your computer. To install "Gen
 
 `pip install --user -i https://test.pypi.org/simple andrka-gendiff --extra-index-url https://pypi.org/simple`
 
-[![asciicast](https://asciinema.org/a/5zVEQ0HD8wJ2Gh2oJBghZ2Yzz.svg)](https://asciinema.org/a/5zVEQ0HD8wJ2Gh2oJBghZ2Yzz)
+[![asciicast](https://asciinema.org/a/LcGT6OPf6QuD3iKCwef5XXkTd.svg)](https://asciinema.org/a/LcGT6OPf6QuD3iKCwef5XXkTd)
 
 #### Start utility:
 
@@ -25,3 +25,17 @@ or
 `gendiff first_yaml_file.yml second_yaml_file.yml`
 
 [![asciicast](https://asciinema.org/a/dftuzIBseoRNiT1svBRICO0UH.svg)](https://asciinema.org/a/dftuzIBseoRNiT1svBRICO0UH)
+
+This way you will see json-like diff between two files.
+
+Also you can set plain text output by choosing -f plain (--format plain) option:
+
+`gendiff -f plain first_json_file.json second_json_file.json`
+
+`gendiff --format plain first_json_file.json second_json_file.json`
+
+`gendiff -f plain first_yaml_file.yml second_yaml_file.yml`
+
+`gendiff --format plain first_yaml_file.yml second_yaml_file.yml`
+
+[![asciicast](https://asciinema.org/a/NtLJIat5JJ67P5SxVbxt6vJ4M.svg)](https://asciinema.org/a/NtLJIat5JJ67P5SxVbxt6vJ4M)
