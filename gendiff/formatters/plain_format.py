@@ -29,7 +29,7 @@ def prepare_to_plain_format(  # noqa: WPS231, WPS210
                 current_value = key_parameter[1]
                 if isinstance(current_value, dict):
                     current_value = '[complex value]'
-                elif not isinstance(current_value, bool):
+                elif not isinstance(current_value, bool):  # noqa: WPS220
                     current_value = "'{0}'".format(current_value)
                 new_line = (
                     "Property '{0}' was added with value: {1}"
@@ -55,12 +55,12 @@ def prepare_to_plain_format(  # noqa: WPS231, WPS210
                 current_value = key_parameter[2]
                 if isinstance(current_value, dict):
                     current_value = '[complex value]'
-                elif not isinstance(current_value, bool):
+                elif not isinstance(current_value, bool):  # noqa: WPS220
                     current_value = "'{0}'".format(current_value)
                 old_value = key_parameter[1]
                 if isinstance(old_value, dict):
                     old_value = '[complex value]'
-                elif not isinstance(old_value, bool):
+                elif not isinstance(old_value, bool):  # noqa: WPS220
                     old_value = "'{0}'".format(old_value)
                 new_line = (
                     "Property '{0}' was updated. From {1} to {2}"
