@@ -10,11 +10,19 @@ Before you start, you will need Python and pip on your computer. To install "Gen
 
 `pip install --user -i https://test.pypi.org/simple andrka-gendiff --extra-index-url https://pypi.org/simple`
 
-[![asciicast](https://asciinema.org/a/LcGT6OPf6QuD3iKCwef5XXkTd.svg)](https://asciinema.org/a/LcGT6OPf6QuD3iKCwef5XXkTd)
+[![asciicast](https://asciinema.org/a/1Eye20kWci5AUiAmx2WdmHcfC.svg)](https://asciinema.org/a/1Eye20kWci5AUiAmx2WdmHcfC)
 
 #### Start utility:
 
-To start this utility after installation, print and run in the terminal:
+To get help with utility after installation, print and run in the terminal:
+
+`gendiff -h`
+
+`gendiff --help`
+
+[![asciicast](https://asciinema.org/a/L5y5wyT6vz1nymQH3E2Rboh7G.svg)](https://asciinema.org/a/L5y5wyT6vz1nymQH3E2Rboh7G)
+
+To start this utility print and run in the terminal:
 
 `gendiff first_json_file.json second_json_file.json`
 
@@ -26,7 +34,9 @@ or
 
 [![asciicast](https://asciinema.org/a/dftuzIBseoRNiT1svBRICO0UH.svg)](https://asciinema.org/a/dftuzIBseoRNiT1svBRICO0UH)
 
-This way you will see json-like diff between two files.
+(where first_\*.\* and second_\*.\* are paths to compared files).
+
+This way you will see json-like text diff between two files (default output format: -f json-like (--format json-like)).
 
 Also you can set plain text output by choosing -f plain (--format plain) option:
 
@@ -39,3 +49,15 @@ Also you can set plain text output by choosing -f plain (--format plain) option:
 `gendiff --format plain first_yaml_file.yml second_yaml_file.yml`
 
 [![asciicast](https://asciinema.org/a/NtLJIat5JJ67P5SxVbxt6vJ4M.svg)](https://asciinema.org/a/NtLJIat5JJ67P5SxVbxt6vJ4M)
+
+or json output by choosing -f json (--format json) option:
+
+`gendiff -f json first_json_file.json second_json_file.json`
+
+`gendiff --format json first_json_file.json second_json_file.json`
+
+`gendiff -f json first_yaml_file.yml second_yaml_file.yml`
+
+`gendiff --format json first_yaml_file.yml second_yaml_file.yml`
+
+[![asciicast](https://asciinema.org/a/dzLHlT5VZpGgV9UHclmfBLWvk.svg)](https://asciinema.org/a/dzLHlT5VZpGgV9UHclmfBLWvk)

@@ -46,3 +46,13 @@ def test_parse_arguments():
     assert args.format == 'plain'
     assert args.first_file == 'first'
     assert args.second_file == 'second'
+    sys.argv = [
+        'test4',
+        '-fjson',
+        'first',
+        'second',
+    ]
+    args = parse_arguments()
+    assert args.format == 'json'
+    assert args.first_file == 'first'
+    assert args.second_file == 'second'

@@ -125,10 +125,119 @@ Property 'group1.baz' was updated. From 'bas' to 'bars'
 Property 'group1.nest' was updated. From [complex value] to 'str'
 Property 'group2' was removed
 Property 'group3' was added with value: [complex value]"""
+diff_json = """{
+    "common": {
+        "type": "nested",
+        "value": {
+            "follow": {
+                "type": "added",
+                "value": false,
+            },
+            "setting1": {
+                "type": "same",
+                "value": "Value 1",
+            },
+            "setting2": {
+                "type": "deleted",
+                "value": 200,
+            },
+            "setting3": {
+                "type": "changed",
+                "value": {
+                    "old": true,
+                    "new": {
+                        "key": "value",
+                    },
+                },
+            },
+            "setting4": {
+                "type": "added",
+                "value": "blah blah",
+            },
+            "setting5": {
+                "type": "added",
+                "value": {
+                    "key5": "value5",
+                },
+            },
+            "setting6": {
+                "type": "nested",
+                "value": {
+                    "doge": {
+                        "type": "nested",
+                        "value": {
+                            "wow": {
+                                "type": "changed",
+                                "value": {
+                                    "old": "too much",
+                                    "new": "so much",
+                                },
+                            },
+                        },
+                    },
+                    "key": {
+                        "type": "same",
+                        "value": "value",
+                    },
+                    "ops": {
+                        "type": "added",
+                        "value": "vops",
+                    },
+                },
+            },
+        },
+    },
+    "group1": {
+        "type": "nested",
+        "value": {
+            "baz": {
+                "type": "changed",
+                "value": {
+                    "old": "bas",
+                    "new": "bars",
+                },
+            },
+            "foo": {
+                "type": "same",
+                "value": "bar",
+            },
+            "nest": {
+                "type": "changed",
+                "value": {
+                    "old": {
+                        "key": "value",
+                    },
+                    "new": "str",
+                },
+            },
+        },
+    },
+    "group2": {
+        "type": "deleted",
+        "value": {
+            "abc": 12345,
+            "deep": {
+                "id": 45,
+            },
+        },
+    },
+    "group3": {
+        "type": "added",
+        "value": {
+            "fee": 100500,
+            "deep": {
+                "id": {
+                    "number": 45,
+                },
+            },
+        },
+    },
+}"""
 before_json_path = 'tests/fixtures/before.json'
 after_json_path = 'tests/fixtures/after.json'
 result_json_like = 'tests/fixtures/diff_json_like.txt'
 result_plain = 'tests/fixtures/diff_plain.txt'
+result_json = 'tests/fixtures/diff_json.txt'
 before_yaml_path = 'tests/fixtures/before.yml'
 after_yaml_path = 'tests/fixtures/after.yml'
 
@@ -139,6 +248,7 @@ def test_open_file():
     assert open_file(after_json_path) == after
     assert open_file(result_json_like) == diff_json_like
     assert open_file(result_plain) == diff_plain
+    assert open_file(result_json) == diff_json
     assert open_file(before_yaml_path) == before
     assert open_file(after_yaml_path) == after
 
@@ -153,6 +263,7 @@ def test_open_txt_file():
     """Test open_txt_file function."""
     assert open_txt_file(result_json_like) == diff_json_like
     assert open_txt_file(result_plain) == diff_plain
+    assert open_txt_file(result_json) == diff_json
 
 
 def test_open_yaml_file():

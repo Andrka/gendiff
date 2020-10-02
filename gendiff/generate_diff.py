@@ -4,6 +4,7 @@
 
 from gendiff.constants import ADDED, CHANGED, DELETED, NESTED, SAME
 from gendiff.file_loader import open_file
+from gendiff.formatters.json_format import prepare_to_json_format
 from gendiff.formatters.json_like_format import prepare_to_json_like_format
 from gendiff.formatters.plain_format import prepare_to_plain_format
 
@@ -19,6 +20,8 @@ def generate_diff_for_print(
     diff = create_diff(first_file, second_file)
     if print_format == 'plain':
         return prepare_to_plain_format(diff)
+    if print_format == 'json':
+        return prepare_to_json_format(diff)
     return prepare_to_json_like_format(diff)
 
 

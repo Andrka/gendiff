@@ -80,3 +80,28 @@ def test_main(capfd):
     test_diff = set(out[1:-1].split('\n'))
     assert sample_diff == test_diff
     assert err == ''
+    sample_diff = set(
+        open_file('tests/fixtures/diff_json.txt').split('\n'),
+    )
+    sys.argv = [
+        'test7',
+        '-fjson',
+        'tests/fixtures/before.json',
+        'tests/fixtures/after.json',
+    ]
+    main()
+    out, err = capfd.readouterr()
+    test_diff = set(out[1:-1].split('\n'))
+    assert sample_diff == test_diff
+    assert err == ''
+    sys.argv = [
+        'test8',
+        '-fjson',
+        'tests/fixtures/before.yml',
+        'tests/fixtures/after.yml',
+    ]
+    main()
+    out, err = capfd.readouterr()
+    test_diff = set(out[1:-1].split('\n'))
+    assert sample_diff == test_diff
+    assert err == ''
