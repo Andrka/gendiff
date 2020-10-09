@@ -44,6 +44,7 @@ Also you can set plain text output by choosing -f plain (--format plain) option:
 
 `gendiff --format plain first_json_file.json second_json_file.json`
 
+
 `gendiff -f plain first_yaml_file.yml second_yaml_file.yml`
 
 `gendiff --format plain first_yaml_file.yml second_yaml_file.yml`
@@ -55,6 +56,7 @@ or json output by choosing -f json (--format json) option:
 `gendiff -f json first_json_file.json second_json_file.json`
 
 `gendiff --format json first_json_file.json second_json_file.json`
+
 
 `gendiff -f json first_yaml_file.yml second_yaml_file.yml`
 
