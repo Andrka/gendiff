@@ -25,28 +25,36 @@ def generate_diff_for_print(
     return prepare_to_json_like_format(diff)
 
 
-def create_diff(first_file: dict, second_file: dict) -> dict:  # noqa: WPS231
+def create_diff(first_file: dict, second_file: dict) -> dict:  # noqa: WPS210
     """Create dict with diff between two files."""
     diff = {}
-    keys = set(first_file.keys()) | set(second_file.keys())
-    for key in keys:
-        first_file_value = first_file.get(key)
-        second_file_value = second_file.get(key)
+    common_keys = first_file.keys() & second_file.keys()
+    deleted_keys = first_file.keys() - second_file.keys()
+    added_keys = second_file.keys() - first_file.keys()
+    for common_key in common_keys:
+        first_file_value = first_file.get(common_key)
+        second_file_value = second_file.get(common_key)
         if first_file_value == second_file_value:
-            diff[key] = [SAME, first_file_value]  # noqa: WPS204
-            continue
-        if isinstance(first_file_value, dict):
-            if isinstance(second_file_value, dict):
-                diff[key] = [
-                    NESTED,
-                    create_diff(first_file_value, second_file_value),
-                ]
-                continue
-        if first_file_value is None:
-            diff[key] = [ADDED, second_file_value]
-            continue
-        if second_file_value is None:
-            diff[key] = [DELETED, first_file_value]
-            continue
-        diff[key] = [CHANGED, first_file_value, second_file_value]
+            diff[common_key] = [SAME, first_file_value]
+        elif isinstance(  # noqa: WPS337
+            first_file_value,
+            dict,
+        ) and isinstance(
+            second_file_value,
+            dict,
+        ):
+            diff[common_key] = [NESTED, create_diff(
+                first_file_value,
+                second_file_value,
+            )]
+        else:
+            diff[common_key] = [
+                CHANGED,
+                first_file_value,
+                second_file_value,
+            ]
+    for deleted_key in deleted_keys:
+        diff[deleted_key] = [DELETED, first_file.get(deleted_key)]
+    for added_key in added_keys:
+        diff[added_key] = [ADDED, second_file.get(added_key)]
     return diff
