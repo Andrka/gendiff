@@ -2,97 +2,61 @@
 
 """Test generate_diff module."""
 
-from gendiff.file_loader import open_file
+import pytest
+
 from gendiff.generate_diff import create_diff, generate_diff_for_print
 
-expected_json_like_result = open_file('tests/fixtures/diff_json_like.txt')
-expected_plain_result = open_file('tests/fixtures/diff_plain.txt')
-expected_json_result = open_file('tests/fixtures/diff_json.txt')
-before_json_path = 'tests/fixtures/before.json'
-after_json_path = 'tests/fixtures/after.json'
-before_yaml_path = 'tests/fixtures/before.yml'
-after_yaml_path = 'tests/fixtures/after.yml'
+BEFORE_JSON_PATH = 'tests/fixtures/before.json'
+AFTER_JSON_PATH = 'tests/fixtures/after.json'
+BEFORE_YAML_PATH = 'tests/fixtures/before.yml'
+AFTER_YAML_PATH = 'tests/fixtures/after.yml'
 
 
-def test_generate_diff_for_print():
+@pytest.mark.parametrize(
+    'expected_result, before_path, after_path, output_format',
+    [
+        ('diff_json_like_txt', BEFORE_JSON_PATH, AFTER_JSON_PATH, None),
+        ('diff_json_like_txt', BEFORE_YAML_PATH, AFTER_YAML_PATH, None),
+        ('diff_json_like_txt', BEFORE_JSON_PATH, AFTER_JSON_PATH, 'json-like'),
+        ('diff_json_like_txt', BEFORE_YAML_PATH, AFTER_YAML_PATH, 'json-like'),
+        ('diff_plain_txt', BEFORE_JSON_PATH, AFTER_JSON_PATH, 'plain'),
+        ('diff_plain_txt', BEFORE_YAML_PATH, AFTER_YAML_PATH, 'plain'),
+        ('diff_json_txt', BEFORE_JSON_PATH, AFTER_JSON_PATH, 'json'),
+        ('diff_json_txt', BEFORE_YAML_PATH, AFTER_YAML_PATH, 'json'),
+    ],
+)
+def test_generate_diff_for_print(
+    request,
+    expected_result,
+    before_path,
+    after_path,
+    output_format,
+):
     """Test generate_diff_for_print function."""
-    sample_diff = set(expected_json_like_result.split('\n'))
+    sample_diff = set(request.getfixturevalue(expected_result).split('\n'))
     test_diff = set(
         generate_diff_for_print(
-            before_json_path,
-            after_json_path,
-        ).split('\n'),
-    )
-    assert sample_diff == test_diff
-    test_diff = set(
-        generate_diff_for_print(
-            before_yaml_path,
-            after_yaml_path,
-        ).split('\n'),
-    )
-    assert sample_diff == test_diff
-    test_diff = set(
-        generate_diff_for_print(
-            before_json_path,
-            after_json_path,
-            'json_like',
-        ).split('\n'),
-    )
-    assert sample_diff == test_diff
-    test_diff = set(
-        generate_diff_for_print(
-            before_yaml_path,
-            after_yaml_path,
-            'json_like',
-        ).split('\n'),
-    )
-    assert sample_diff == test_diff
-    sample_diff = set(expected_plain_result.split('\n'))
-    test_diff = set(
-        generate_diff_for_print(
-            before_json_path,
-            after_json_path,
-            'plain',
-        ).split('\n'),
-    )
-    assert sample_diff == test_diff
-    test_diff = set(
-        generate_diff_for_print(
-            before_yaml_path,
-            after_yaml_path,
-            'plain',
-        ).split('\n'),
-    )
-    assert sample_diff == test_diff
-    sample_diff = set(expected_json_result.split('\n'))
-    test_diff = set(
-        generate_diff_for_print(
-            before_json_path,
-            after_json_path,
-            'json',
-        ).split('\n'),
-    )
-    assert sample_diff == test_diff
-    test_diff = set(
-        generate_diff_for_print(
-            before_yaml_path,
-            after_yaml_path,
-            'json',
+            before_path,
+            after_path,
+            output_format,
         ).split('\n'),
     )
     assert sample_diff == test_diff
 
 
-diff = open_file('tests/fixtures/diff.json')
-
-
-def test_create_diff():
+def test_create_diff(
+    diff_json,
+    before_json,
+    after_json,
+    before_yml,
+    after_yml,
+):
     """Test create_diff function."""
     assert create_diff(
-        open_file(before_json_path),
-        open_file(after_json_path),
-    ) == diff
+        before_json,
+        after_json,
+    ) == diff_json
     assert create_diff(
-        open_file(before_yaml_path),
-        open_file(after_yaml_path),
-    ) == diff
+        before_yml,
+        after_yml,
+    ) == diff_json
