@@ -1,10 +1,11 @@
 # -*- coding:utf-8 -*-
 
-"""Test generate_diff module."""
+"""Test diff module."""
 
 import pytest
 
-from gendiff.generate_diff import create_diff, generate_diff_for_print
+from gendiff import format
+from gendiff.diff import create_diff, generate_diff_for_print
 
 BEFORE_JSON_PATH = 'tests/fixtures/before.json'
 AFTER_JSON_PATH = 'tests/fixtures/after.json'
@@ -15,14 +16,14 @@ AFTER_YAML_PATH = 'tests/fixtures/after.yml'
 @pytest.mark.parametrize(
     'expected_result, before_path, after_path, output_format',
     [
-        ('diff_json_like_txt', BEFORE_JSON_PATH, AFTER_JSON_PATH, None),
-        ('diff_json_like_txt', BEFORE_YAML_PATH, AFTER_YAML_PATH, None),
-        ('diff_json_like_txt', BEFORE_JSON_PATH, AFTER_JSON_PATH, 'json-like'),
-        ('diff_json_like_txt', BEFORE_YAML_PATH, AFTER_YAML_PATH, 'json-like'),
-        ('diff_plain_txt', BEFORE_JSON_PATH, AFTER_JSON_PATH, 'plain'),
-        ('diff_plain_txt', BEFORE_YAML_PATH, AFTER_YAML_PATH, 'plain'),
-        ('diff_json_txt', BEFORE_JSON_PATH, AFTER_JSON_PATH, 'json'),
-        ('diff_json_txt', BEFORE_YAML_PATH, AFTER_YAML_PATH, 'json'),
+        ('diff_default_txt', BEFORE_JSON_PATH, AFTER_JSON_PATH, None),
+        ('diff_default_txt', BEFORE_YAML_PATH, AFTER_YAML_PATH, None),
+        ('diff_default_txt', BEFORE_JSON_PATH, AFTER_JSON_PATH, format.DEFAULT),
+        ('diff_default_txt', BEFORE_YAML_PATH, AFTER_YAML_PATH, format.DEFAULT),
+        ('diff_plain_txt', BEFORE_JSON_PATH, AFTER_JSON_PATH, format.PLAIN),
+        ('diff_plain_txt', BEFORE_YAML_PATH, AFTER_YAML_PATH, format.PLAIN),
+        ('diff_json_txt', BEFORE_JSON_PATH, AFTER_JSON_PATH, format.JSON),
+        ('diff_json_txt', BEFORE_YAML_PATH, AFTER_YAML_PATH, format.JSON),
     ],
 )
 def test_generate_diff_for_print(

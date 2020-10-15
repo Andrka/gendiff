@@ -2,21 +2,21 @@
 
 """Generate plain text diff between two files."""
 
-from gendiff.constants import ADDED, CHANGED, DELETED, NESTED
-from gendiff.formatters.converter import convert_to_json_veiw
+from gendiff import diff
+from gendiff.format.converter import convert_to_json_veiw
 
 
-def prepare_to_plain_format(  # noqa: WPS231, WPS210
-    diff: dict,
+def plain(  # noqa: WPS231, WPS210
+    diff_dict: dict,
     path_to_root: str = '',
     ) -> str:
     """Convert given diff to plain text format."""
     diff_in_list = []
-    for key, key_parameter in diff.items():
+    for key, key_parameter in diff_dict.items():
         if isinstance(key_parameter, list):
-            if key_parameter[0] == NESTED:
+            if key_parameter[0] == diff.NESTED:
                 diff_in_list.append(
-                    prepare_to_plain_format(
+                    plain(
                         key_parameter[1],  # noqa: WPS204
                         '{0}{1}{2}'.format(
                             path_to_root,
@@ -25,7 +25,7 @@ def prepare_to_plain_format(  # noqa: WPS231, WPS210
                         ),
                     ),
                 )
-            if key_parameter[0] == ADDED:
+            if key_parameter[0] == diff.ADDED:
                 current_value = key_parameter[1]
                 if isinstance(current_value, dict):
                     current_value = '[complex value]'
@@ -42,7 +42,7 @@ def prepare_to_plain_format(  # noqa: WPS231, WPS210
                     convert_to_json_veiw(current_value),
                 )
                 diff_in_list.append(new_line)
-            if key_parameter[0] == DELETED:
+            if key_parameter[0] == diff.DELETED:
                 new_line = "Property '{0}' was removed".format(
                     '{0}{1}{2}'.format(
                         path_to_root,
@@ -51,7 +51,7 @@ def prepare_to_plain_format(  # noqa: WPS231, WPS210
                     ),
                 )
                 diff_in_list.append(new_line)
-            if key_parameter[0] == CHANGED:
+            if key_parameter[0] == diff.CHANGED:
                 current_value = key_parameter[2]
                 if isinstance(current_value, dict):
                     current_value = '[complex value]'

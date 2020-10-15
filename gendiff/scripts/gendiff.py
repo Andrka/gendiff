@@ -3,20 +3,19 @@
 
 """Package is under development."""
 
-from gendiff.cli import parse_arguments, print_result
-from gendiff.generate_diff import generate_diff_for_print
+from gendiff.cli import parse_arguments
+from gendiff.diff import generate_diff_for_print
 
 
-def main():
+def main():  # pragma: no cover
     """Generate diff."""
-    args = parse_arguments()
-    print_result(
-        generate_diff_for_print(
-            args.first_file,
-            args.second_file,
-            args.format,
-        ),
-    )
+    args = parse_arguments().parse_args()
+    print()
+    print(generate_diff_for_print(
+        args.first_file,
+        args.second_file,
+        args.format,
+    ))
 
 
 if __name__ == '__main__':

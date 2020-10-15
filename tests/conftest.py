@@ -40,10 +40,10 @@ def load_before_yaml() -> dict:
     return yaml_data
 
 
-@pytest.fixture(name='diff_json_like_txt')
-def load_diff_json_like_txt() -> str:
-    """Load diff_json_like.txt file for tests."""
-    with open('tests/fixtures/diff_json_like.txt', 'r') as txt_file:
+@pytest.fixture(name='diff_default_txt')
+def load_diff_default_txt() -> str:
+    """Load diff_default.txt file for tests."""
+    with open('tests/fixtures/diff_default.txt', 'r') as txt_file:
         txt_data = txt_file.read()
     return txt_data
 

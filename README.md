@@ -36,7 +36,7 @@ or
 
 (where first_\*.\* and second_\*.\* are paths to compared files).
 
-This way you will see json-like text diff between two files (default output format: -f json-like (--format json-like)).
+This way you will see json-like text diff between two files (default output format: -f default (--format default)).
 
 Also you can set plain text output by choosing -f plain (--format plain) option:
 
