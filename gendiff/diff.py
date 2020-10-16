@@ -33,30 +33,23 @@ def create_diff(first_file: dict, second_file: dict) -> dict:  # noqa: WPS210
     common_keys = first_file.keys() & second_file.keys()
     deleted_keys = first_file.keys() - second_file.keys()
     added_keys = second_file.keys() - first_file.keys()
-    for common_key in common_keys:
-        first_file_value = first_file.get(common_key)
-        second_file_value = second_file.get(common_key)
-        if first_file_value == second_file_value:
-            diff_result[common_key] = [SAME, first_file_value]
-        elif isinstance(  # noqa: WPS337
-            first_file_value,
-            dict,
-        ) and isinstance(
-            second_file_value,
-            dict,
-        ):
-            diff_result[common_key] = [NESTED, create_diff(
-                first_file_value,
-                second_file_value,
-            )]
+    for key in common_keys:
+        old_value = first_file[key]
+        new_value = second_file[key]
+        if old_value == new_value:
+            diff_result[key] = (SAME, old_value)  # noqa: WPS204
+        elif (  # noqa: WPS337
+            isinstance(old_value, dict)
+                and isinstance(new_value, dict)  # noqa: W503
+            ):
+            diff_result[key] = (NESTED, create_diff(
+                old_value,
+                new_value,
+            ))
         else:
-            diff_result[common_key] = [
-                CHANGED,
-                first_file_value,
-                second_file_value,
-            ]
-    for deleted_key in deleted_keys:
-        diff_result[deleted_key] = [DELETED, first_file.get(deleted_key)]
-    for added_key in added_keys:
-        diff_result[added_key] = [ADDED, second_file.get(added_key)]
+            diff_result[key] = (CHANGED, (old_value, new_value))
+    for key in deleted_keys:  # noqa: WPS440
+        diff_result[key] = (DELETED, first_file[key])  # noqa: WPS441
+    for key in added_keys:  # noqa: WPS440
+        diff_result[key] = (ADDED, second_file[key])  # noqa: WPS441
     return diff_result

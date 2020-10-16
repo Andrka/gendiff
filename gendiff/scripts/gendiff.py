@@ -7,7 +7,7 @@ from gendiff.cli import parse_arguments
 from gendiff.diff import generate_diff_for_print
 
 
-def main():  # pragma: no cover
+def main():
     """Generate diff."""
     args = parse_arguments().parse_args()
     print()

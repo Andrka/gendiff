@@ -1,91 +1,91 @@
 {
-    "common": [
+    "common": (
         "nested",
         {
-            "setting1": [
+            "setting1": (
                 "same",
                 "Value 1"
-            ],
-            "setting3": [
+            ),
+            "setting3": (
                 "changed",
-                [
-                    true,
+                (
+                    True,
                     {
                         "key": "value"
                     }
-                ]
-            ],
-            "setting6": [
+                )
+            ),
+            "setting6": (
                 "nested",
                 {
-                    "doge": [
+                    "doge": (
                         "nested",
                         {
-                            "wow": [
+                            "wow": (
                                 "changed",
-                                [
+                                (
                                     "too much",
                                     "so much"
-                                ]
-                            ]
+                                )
+                            )
                         }
-                    ],
-                    "key": [
+                    ),
+                    "key": (
                         "same",
                         "value"
-                    ],
-                    "ops": [
+                    ),
+                    "ops": (
                         "added",
                         "vops"
-                    ]
+                    )
                 }
-            ],
-            "setting2": [
+            ),
+            "setting2": (
                 "deleted",
                 200
-            ],
-            "setting5": [
+            ),
+            "setting5": (
                 "added",
                 {
                     "key5": "value5"
                 }
-            ],
-            "setting4": [
+            ),
+            "setting4": (
                 "added",
                 "blah blah"
-            ],
-            "follow": [
+            ),
+            "follow": (
                 "added",
-                false
-            ]
+                False
+            )
         }
-    ],
-    "group1": [
+    ),
+    "group1": (
         "nested",
         {
-            "foo": [
+            "foo": (
                 "same",
                 "bar"
-            ],
-            "baz": [
+            ),
+            "baz": (
                 "changed",
-                [
+                (
                     "bas",
                     "bars"
-                ]
-            ],
-            "nest": [
+                )
+            ),
+            "nest": (
                 "changed",
-                [
+                (
                     {
                         "key": "value"
                     },
                     "str"
-                ]
-            ]
+                )
+            )
         }
-    ],
-    "group2": [
+    ),
+    "group2": (
         "deleted",
         {
             "abc": 12345,
@@ -93,8 +93,8 @@
                 "id": 45
             }
         }
-    ],
-    "group3": [
+    ),
+    "group3": (
         "added",
         {
             "fee": 100500,
@@ -104,5 +104,5 @@
                 }
             }
         }
-    ]
+    )
 }

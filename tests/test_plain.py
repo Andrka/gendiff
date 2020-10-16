@@ -5,7 +5,7 @@
 from gendiff.format.plain import plain
 
 
-def test_plain(diff_json, diff_plain_txt):
+def test_plain(diff, diff_plain_txt):
     """Test plain function."""
-    test_diff = plain(diff_json)
-    assert diff_plain_txt == test_diff
+    test_diff = plain(diff)
+    assert set(diff_plain_txt) == set(test_diff)

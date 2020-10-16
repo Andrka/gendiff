@@ -14,3 +14,6 @@ test:
 	poetry run pytest --cov=gendiff --cov-report xml tests/
 
 check: lint test
+
+report:
+	poetry run coverage report

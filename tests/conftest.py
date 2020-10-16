@@ -2,6 +2,7 @@
 
 """Define fixtures to use in tests."""
 
+import ast
 import json
 
 import pytest
@@ -64,9 +65,9 @@ def load_diff_plain_txt() -> str:
     return txt_data
 
 
-@pytest.fixture(name='diff_json')
-def load_diff_json() -> dict:
-    """Load diff.json file for tests."""
-    with open('tests/fixtures/diff.json', 'r') as json_file:
-        json_data = json.load(json_file)
-    return json_data
+@pytest.fixture(name='diff')
+def load_diff() -> dict:
+    """Load diff.txt file for tests."""
+    with open('tests/fixtures/diff.txt', 'r') as txt_file:
+        txt_data = txt_file.read()
+    return ast.literal_eval(txt_data)

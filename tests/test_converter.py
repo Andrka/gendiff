@@ -2,7 +2,7 @@
 
 """Test converter module."""
 
-from gendiff.format.converter import convert_to_json_veiw
+from gendiff.converter import convert_to_json_veiw
 
 
 def test_convert_to_json_veiw():

@@ -45,19 +45,16 @@ def test_generate_diff_for_print(
     assert sample_diff == test_diff
 
 
-def test_create_diff(
-    diff_json,
-    before_json,
-    after_json,
-    before_yml,
-    after_yml,
-):
+@pytest.mark.parametrize(
+    'old, new',
+    [
+        ('before_json', 'after_json'),
+        ('before_yml', 'after_yml'),
+    ],
+)
+def test_create_diff(diff, request, old, new):
     """Test create_diff function."""
     assert create_diff(
-        before_json,
-        after_json,
-    ) == diff_json
-    assert create_diff(
-        before_yml,
-        after_yml,
-    ) == diff_json
+        request.getfixturevalue(old),
+        request.getfixturevalue(new),
+    ) == diff

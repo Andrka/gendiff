@@ -3,7 +3,7 @@
 """Generate plain text diff between two files."""
 
 from gendiff import diff
-from gendiff.format.converter import convert_to_json_veiw
+from gendiff.converter import convert_to_json_veiw
 
 
 def plain(  # noqa: WPS231, WPS210
@@ -13,7 +13,7 @@ def plain(  # noqa: WPS231, WPS210
     """Convert given diff to plain text format."""
     diff_in_list = []
     for key, key_parameter in diff_dict.items():
-        if isinstance(key_parameter, list):
+        if isinstance(key_parameter, tuple):
             if key_parameter[0] == diff.NESTED:
                 diff_in_list.append(
                     plain(
@@ -52,12 +52,12 @@ def plain(  # noqa: WPS231, WPS210
                 )
                 diff_in_list.append(new_line)
             if key_parameter[0] == diff.CHANGED:
-                current_value = key_parameter[2]
+                current_value = key_parameter[1][1]
                 if isinstance(current_value, dict):
                     current_value = '[complex value]'
                 elif not isinstance(current_value, bool):  # noqa: WPS220
                     current_value = "'{0}'".format(current_value)
-                old_value = key_parameter[1]
+                old_value = key_parameter[1][0]
                 if isinstance(old_value, dict):
                     old_value = '[complex value]'
                 elif not isinstance(old_value, bool):  # noqa: WPS220

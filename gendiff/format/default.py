@@ -3,7 +3,7 @@
 """Generate json-like text diff between two files."""
 
 from gendiff import diff, format
-from gendiff.format.converter import convert_to_json_veiw
+from gendiff.converter import convert_to_json_veiw
 
 
 def default(  # noqa: WPS231
@@ -13,7 +13,7 @@ def default(  # noqa: WPS231
     """Convert given diff to json-like text format."""
     diff_in_str = '{0}\n'.format('{')
     for key, key_parameter in diff_dict.items():
-        if isinstance(key_parameter, list):
+        if isinstance(key_parameter, tuple):
             if key_parameter[0] == diff.DELETED:
                 diff_in_str = '{0}{1}  - {2}: {3}\n'.format(
                     diff_in_str,
@@ -62,21 +62,21 @@ def default(  # noqa: WPS231
                     format.INDENT * level_of_indent,
                     key,
                     default(
-                        key_parameter[1],
+                        key_parameter[1][0],
                         level_of_indent + 1,
                     ) if isinstance(
-                        key_parameter[1],
+                        key_parameter[1][0],
                         dict,
-                    ) else convert_to_json_veiw(key_parameter[1]),
+                    ) else convert_to_json_veiw(key_parameter[1][0]),
                     format.INDENT * level_of_indent,
                     key,
                     default(
-                        key_parameter[2],
+                        key_parameter[1][1],
                         level_of_indent + 1,
                     ) if isinstance(
-                        key_parameter[2],
+                        key_parameter[1][1],
                         dict,
-                    ) else convert_to_json_veiw(key_parameter[2]),
+                    ) else convert_to_json_veiw(key_parameter[1][1]),
                 )
                 continue
             diff_in_str = '{0}{1}    {2}: {3}\n'.format(

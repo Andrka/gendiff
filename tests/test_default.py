@@ -5,7 +5,7 @@
 from gendiff.format.default import default
 
 
-def test_default(diff_json, diff_default_txt):
+def test_default(diff, diff_default_txt):
     """Test default function."""
-    test_diff = default(diff_json)
-    assert diff_default_txt == test_diff
+    test_diff = default(diff)
+    assert set(diff_default_txt) == set(test_diff)
