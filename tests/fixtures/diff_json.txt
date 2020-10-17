@@ -2,9 +2,17 @@
     "common": [
         "nested",
         {
+            "follow": [
+                "added",
+                false
+            ],
             "setting1": [
                 "same",
                 "Value 1"
+            ],
+            "setting2": [
+                "deleted",
+                200
             ],
             "setting3": [
                 "changed",
@@ -14,6 +22,16 @@
                         "key": "value"
                     }
                 ]
+            ],
+            "setting4": [
+                "added",
+                "blah blah"
+            ],
+            "setting5": [
+                "added",
+                {
+                    "key5": "value5"
+                }
             ],
             "setting6": [
                 "nested",
@@ -39,40 +57,22 @@
                         "vops"
                     ]
                 }
-            ],
-            "setting2": [
-                "deleted",
-                200
-            ],
-            "setting5": [
-                "added",
-                {
-                    "key5": "value5"
-                }
-            ],
-            "setting4": [
-                "added",
-                "blah blah"
-            ],
-            "follow": [
-                "added",
-                false
             ]
         }
     ],
     "group1": [
         "nested",
         {
-            "foo": [
-                "same",
-                "bar"
-            ],
             "baz": [
                 "changed",
                 [
                     "bas",
                     "bars"
                 ]
+            ],
+            "foo": [
+                "same",
+                "bar"
             ],
             "nest": [
                 "changed",
@@ -97,12 +97,12 @@
     "group3": [
         "added",
         {
-            "fee": 100500,
             "deep": {
                 "id": {
                     "number": 45
                 }
-            }
+            },
+            "fee": 100500
         }
     ]
 }

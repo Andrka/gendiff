@@ -31,8 +31,6 @@ def create_diff(first_file: dict, second_file: dict) -> dict:  # noqa: WPS210
     """Create dict with diff between two files."""
     diff_result = {}
     common_keys = first_file.keys() & second_file.keys()
-    deleted_keys = first_file.keys() - second_file.keys()
-    added_keys = second_file.keys() - first_file.keys()
     for key in common_keys:
         old_value = first_file[key]
         new_value = second_file[key]
@@ -48,8 +46,10 @@ def create_diff(first_file: dict, second_file: dict) -> dict:  # noqa: WPS210
             ))
         else:
             diff_result[key] = (CHANGED, (old_value, new_value))
+    deleted_keys = first_file.keys() - second_file.keys()
     for key in deleted_keys:  # noqa: WPS440
         diff_result[key] = (DELETED, first_file[key])  # noqa: WPS441
+    added_keys = second_file.keys() - first_file.keys()
     for key in added_keys:  # noqa: WPS440
         diff_result[key] = (ADDED, second_file[key])  # noqa: WPS441
     return diff_result
