@@ -1,7 +1,7 @@
 [tool.poetry]
 name = "Andrka-gendiff"
-version = "0.6.0"
-description = ""
+version = "0.8.0"
+description = "Generate differences"
 authors = ["Andrka <postbox4mail@gmail.com>"]
 packages = [
   { include = "gendiff" },

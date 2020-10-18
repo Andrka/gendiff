@@ -2,19 +2,19 @@
 
 """Find diff."""
 
-from gendiff import files, format
-
 NESTED = 'nested'
 ADDED = 'added'
 DELETED = 'deleted'
 CHANGED = 'changed'
 SAME = 'same'
 
+from gendiff import files, format  # noqa: E402
+
 
 def generate_diff_for_print(
     old_file: str,
     new_file: str,
-    output_format: str = 'default',
+    output_format: str = format.DEFAULT,
 ) -> str:
     """Generate and return diff between two files."""
     first_file = files.load(old_file)

@@ -1,3 +1,3 @@
 # -*- coding:utf-8 -*-
 
-"""Package is under development."""
+"""Scripts for generate differences."""

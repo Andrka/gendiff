@@ -9,34 +9,34 @@ import pytest
 import yaml
 
 
-@pytest.fixture(name='after_json')
-def load_after_json() -> dict:
-    """Load after.json file for tests."""
-    with open('tests/fixtures/after.json', 'r') as json_file:
+@pytest.fixture(name='new_json')
+def load_new_json() -> dict:
+    """Load new.json file for tests."""
+    with open('tests/fixtures/new.json', 'r') as json_file:
         json_data = json.load(json_file)
     return json_data
 
 
-@pytest.fixture(name='after_yml')
-def load_after_yaml() -> dict:
-    """Load after.yml file for tests."""
-    with open('tests/fixtures/after.yml', 'r') as yaml_file:
+@pytest.fixture(name='new_yml')
+def load_new_yaml() -> dict:
+    """Load new.yml file for tests."""
+    with open('tests/fixtures/new.yml', 'r') as yaml_file:
         yaml_data = yaml.safe_load(yaml_file)
     return yaml_data
 
 
-@pytest.fixture(name='before_json')
-def load_before_json() -> dict:
-    """Load before.json file for tests."""
-    with open('tests/fixtures/before.json', 'r') as json_file:
+@pytest.fixture(name='old_json')
+def load_old_json() -> dict:
+    """Load old.json file for tests."""
+    with open('tests/fixtures/old.json', 'r') as json_file:
         json_data = json.load(json_file)
     return json_data
 
 
-@pytest.fixture(name='before_yml')
-def load_before_yaml() -> dict:
-    """Load before.yml file for tests."""
-    with open('tests/fixtures/before.yml', 'r') as yaml_file:
+@pytest.fixture(name='old_yml')
+def load_old_yaml() -> dict:
+    """Load old.yml file for tests."""
+    with open('tests/fixtures/old.yml', 'r') as yaml_file:
         yaml_data = yaml.safe_load(yaml_file)
     return yaml_data
 

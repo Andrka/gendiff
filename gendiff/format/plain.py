@@ -5,73 +5,48 @@
 from gendiff import diff
 from gendiff.converter import convert_to_json_veiw
 
+STATUS = {  # noqa: WPS407
+    diff.ADDED: 'added',
+    diff.DELETED: 'removed',
+    diff.CHANGED: 'updated',
+}
 
-def plain(  # noqa: WPS231, WPS210
-    diff_dict: dict,
-    path_to_root: str = '',
-    ) -> str:
+
+def plain(diff_dict: dict, path_to_root: str = ''):  # noqa: WPS210, WPS231
     """Convert given diff to plain text format."""
-    diff_in_list = []
-    for key, key_parameter in diff_dict.items():
-        if isinstance(key_parameter, tuple):
-            if key_parameter[0] == diff.NESTED:
-                diff_in_list.append(
-                    plain(
-                        key_parameter[1],  # noqa: WPS204
-                        '{0}{1}{2}'.format(
-                            path_to_root,
-                            '.' if path_to_root else '',
-                            key,
-                        ),
-                    ),
+    result = []
+    for key, (status, value) in sorted(diff_dict.items()):  # noqa: WPS405, WPS414, E501
+        if status == diff.NESTED:
+            result.append(
+                plain(value, '{0}{1}.'.format(path_to_root, key)),
+            )
+        elif status in STATUS:
+            result.append(
+                "Property '{0}{1}' was {2}".format(
+                    path_to_root,
+                    key,
+                    STATUS[status],  # noqa: WPS529
+                ),
+            )
+            if status == diff.CHANGED:
+                old_value, new_value = value
+                result[-1] = '{0}. From {1} to {2}'.format(
+                    result[-1],
+                    convert_to_string_veiw(old_value),
+                    convert_to_string_veiw(new_value),
                 )
-            if key_parameter[0] == diff.ADDED:
-                current_value = key_parameter[1]
-                if isinstance(current_value, dict):
-                    current_value = '[complex value]'
-                elif not isinstance(current_value, bool):  # noqa: WPS220
-                    current_value = "'{0}'".format(current_value)
-                new_line = (
-                    "Property '{0}' was added with value: {1}"
-                ).format(
-                    '{0}{1}{2}'.format(
-                        path_to_root,
-                        '.' if path_to_root else '',
-                        key,
-                    ),
-                    convert_to_json_veiw(current_value),
+            elif status == diff.ADDED:
+                result[-1] = '{0} with value: {1}'.format(
+                    result[-1],
+                    convert_to_string_veiw(value),
                 )
-                diff_in_list.append(new_line)
-            if key_parameter[0] == diff.DELETED:
-                new_line = "Property '{0}' was removed".format(
-                    '{0}{1}{2}'.format(
-                        path_to_root,
-                        '.' if path_to_root else '',
-                        key,
-                    ),
-                )
-                diff_in_list.append(new_line)
-            if key_parameter[0] == diff.CHANGED:
-                current_value = key_parameter[1][1]
-                if isinstance(current_value, dict):
-                    current_value = '[complex value]'
-                elif not isinstance(current_value, bool):  # noqa: WPS220
-                    current_value = "'{0}'".format(current_value)
-                old_value = key_parameter[1][0]
-                if isinstance(old_value, dict):
-                    old_value = '[complex value]'
-                elif not isinstance(old_value, bool):  # noqa: WPS220
-                    old_value = "'{0}'".format(old_value)
-                new_line = (
-                    "Property '{0}' was updated. From {1} to {2}"
-                ).format(
-                    '{0}{1}{2}'.format(
-                        path_to_root,
-                        '.' if path_to_root else '',
-                        key,
-                    ),
-                    convert_to_json_veiw(old_value),
-                    convert_to_json_veiw(current_value),
-                )
-                diff_in_list.append(new_line)
-    return '\n'.join(diff_in_list)
+    return '\n'.join(result)
+
+
+def convert_to_string_veiw(value) -> str:
+    """Convert given value to string view."""
+    if isinstance(value, dict):
+        return '[complex value]'
+    elif not isinstance(value, bool):
+        return "'{0}'".format(convert_to_json_veiw(value))
+    return convert_to_json_veiw(value)

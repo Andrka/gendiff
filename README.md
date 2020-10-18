@@ -10,7 +10,7 @@ Before you start, you will need Python and pip on your computer. To install "Gen
 
 `pip install --user -i https://test.pypi.org/simple andrka-gendiff --extra-index-url https://pypi.org/simple`
 
-[![asciicast](https://asciinema.org/a/1Eye20kWci5AUiAmx2WdmHcfC.svg)](https://asciinema.org/a/1Eye20kWci5AUiAmx2WdmHcfC)
+[![asciicast](https://asciinema.org/a/G1Y8WYji4M2xTMUJXDQx5NIrR.svg)](https://asciinema.org/a/G1Y8WYji4M2xTMUJXDQx5NIrR)
 
 #### Start utility:
 
@@ -20,19 +20,19 @@ To get help with utility after installation, print and run in the terminal:
 
 `gendiff --help`
 
-[![asciicast](https://asciinema.org/a/L5y5wyT6vz1nymQH3E2Rboh7G.svg)](https://asciinema.org/a/L5y5wyT6vz1nymQH3E2Rboh7G)
+[![asciicast](https://asciinema.org/a/aIEtaf1uD9IDGAeGpTppNnr2g.svg)](https://asciinema.org/a/aIEtaf1uD9IDGAeGpTppNnr2g)
 
 To start this utility print and run in the terminal:
 
 `gendiff first_json_file.json second_json_file.json`
 
-[![asciicast](https://asciinema.org/a/u3JvS82zTSWRtC5DEnyjnD9ai.svg)](https://asciinema.org/a/u3JvS82zTSWRtC5DEnyjnD9ai)
+[![asciicast](https://asciinema.org/a/TRZ5eB1s5rDIKBHIF2yHzHJBl.svg)](https://asciinema.org/a/TRZ5eB1s5rDIKBHIF2yHzHJBl)
 
 or
 
 `gendiff first_yaml_file.yml second_yaml_file.yml`
 
-[![asciicast](https://asciinema.org/a/dftuzIBseoRNiT1svBRICO0UH.svg)](https://asciinema.org/a/dftuzIBseoRNiT1svBRICO0UH)
+[![asciicast](https://asciinema.org/a/KdHOQQQS3SJN382vLEQrfyR8J.svg)](https://asciinema.org/a/KdHOQQQS3SJN382vLEQrfyR8J)
 
 (where first_\*.\* and second_\*.\* are paths to compared files).
 
@@ -49,7 +49,7 @@ Also you can set plain text output by choosing -f plain (--format plain) option:
 
 `gendiff --format plain first_yaml_file.yml second_yaml_file.yml`
 
-[![asciicast](https://asciinema.org/a/NtLJIat5JJ67P5SxVbxt6vJ4M.svg)](https://asciinema.org/a/NtLJIat5JJ67P5SxVbxt6vJ4M)
+[![asciicast](https://asciinema.org/a/UIKomNCBFr3tGD53w7yh1bIOK.svg)](https://asciinema.org/a/UIKomNCBFr3tGD53w7yh1bIOK)
 
 or json output by choosing -f json (--format json) option:
 
@@ -62,4 +62,4 @@ or json output by choosing -f json (--format json) option:
 
 `gendiff --format json first_yaml_file.yml second_yaml_file.yml`
 
-[![asciicast](https://asciinema.org/a/dzLHlT5VZpGgV9UHclmfBLWvk.svg)](https://asciinema.org/a/dzLHlT5VZpGgV9UHclmfBLWvk)
+[![asciicast](https://asciinema.org/a/RBExLUmBdQpCyo3z3L0vV9cib.svg)](https://asciinema.org/a/RBExLUmBdQpCyo3z3L0vV9cib)

@@ -1,13 +1,11 @@
 # -*- coding:utf-8 -*-
 
-"""Package is under development."""
-
-from gendiff.format.default import default
-from gendiff.format.json import json
-from gendiff.format.plain import plain
-
-INDENT = '    '
+"""Output formatters for generate differences."""
 
 DEFAULT = 'default'
 JSON = 'json'
 PLAIN = 'plain'
+
+from gendiff.format.default import default  # noqa: E402
+from gendiff.format.json import json  # noqa: E402
+from gendiff.format.plain import plain  # noqa: E402

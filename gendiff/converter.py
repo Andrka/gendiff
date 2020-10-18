@@ -3,7 +3,7 @@
 """Convert given python value to json veiw."""
 
 
-def convert_to_json_veiw(value) -> str:  # noqa: WPS110
+def convert_to_json_veiw(value) -> str:
     """Convert given python value to json veiw."""
     if value is True:
         return 'true'

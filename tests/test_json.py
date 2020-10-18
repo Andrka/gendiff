@@ -7,5 +7,4 @@ from gendiff.format.json import json
 
 def test_json(diff, diff_json_txt):
     """Test json function."""
-    test_diff = json(diff)
-    assert diff_json_txt == test_diff
+    assert json(diff) == diff_json_txt

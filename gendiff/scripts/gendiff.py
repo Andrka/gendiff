@@ -3,8 +3,8 @@
 
 """Package is under development."""
 
-from gendiff.cli import parse_arguments
 from gendiff.diff import generate_diff_for_print
+from gendiff.parser import parse_arguments
 
 
 def main():

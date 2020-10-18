@@ -14,7 +14,11 @@ def parse_arguments():
         '-f',
         '--format',
         default=format.DEFAULT,
-        choices=[format.DEFAULT, format.PLAIN, format.JSON],
+        choices=[
+            format.DEFAULT,
+            format.PLAIN,
+            format.JSON,
+        ],
         help='set format of output',
     )
     parser.add_argument('first_file')
