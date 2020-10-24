@@ -3,7 +3,7 @@
 """Generate plain text diff between two files."""
 
 from gendiff import diff
-from gendiff.converter import convert_to_json_veiw
+from gendiff.values import convert_to_json_value
 
 STATUS = {  # noqa: WPS407
     diff.ADDED: 'added',
@@ -32,21 +32,21 @@ def plain(diff_dict: dict, path_to_root: str = ''):  # noqa: WPS210, WPS231
                 old_value, new_value = value
                 result[-1] = '{0}. From {1} to {2}'.format(
                     result[-1],
-                    convert_to_string_veiw(old_value),
-                    convert_to_string_veiw(new_value),
+                    convert_to_string_value(old_value),
+                    convert_to_string_value(new_value),
                 )
             elif status == diff.ADDED:
                 result[-1] = '{0} with value: {1}'.format(
                     result[-1],
-                    convert_to_string_veiw(value),
+                    convert_to_string_value(value),
                 )
     return '\n'.join(result)
 
 
-def convert_to_string_veiw(value) -> str:
-    """Convert given value to string view."""
+def convert_to_string_value(value) -> str:
+    """Convert given value to string value."""
     if isinstance(value, dict):
         return '[complex value]'
     elif not isinstance(value, bool):
-        return "'{0}'".format(convert_to_json_veiw(value))
-    return convert_to_json_veiw(value)
+        return "'{0}'".format(convert_to_json_value(value))
+    return convert_to_json_value(value)

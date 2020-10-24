@@ -3,7 +3,7 @@
 """Generate json-like text diff between two files."""
 
 from gendiff import diff
-from gendiff.converter import convert_to_json_veiw
+from gendiff.values import convert_to_json_value
 
 SYMBOLS = {  # noqa: WPS407
     diff.ADDED: '+',
@@ -86,7 +86,7 @@ def value_to_str(  # noqa: WPS231
                     '{0}{1}: {2}'.format(
                         INDENT * (indent_level + 3),
                         key,
-                        convert_to_json_veiw(item),
+                        convert_to_json_value(item),
                     ),
                 )
         if indent_level != 1:
@@ -94,4 +94,4 @@ def value_to_str(  # noqa: WPS231
                 '{0}}}'.format(INDENT * (indent_level + 1)),
             )
         return '\n'.join(result)
-    return convert_to_json_veiw(value)
+    return convert_to_json_value(value)

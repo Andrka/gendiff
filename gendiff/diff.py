@@ -11,23 +11,30 @@ SAME = 'same'
 from gendiff import files, format  # noqa: E402
 
 
-def generate_diff_for_print(
+def printable(
     old_file: str,
     new_file: str,
     output_format: str = format.DEFAULT,
 ) -> str:
-    """Generate and return diff between two files."""
+    """Generate and return diff between two files.
+
+    Raises:
+        ValueError: unsupported output format.
+
+    """
     first_file = files.load(old_file)
     second_file = files.load(new_file)
-    diff = create_diff(first_file, second_file)
+    diff = compare(first_file, second_file)
+    if output_format == format.DEFAULT:
+        return format.default(diff)
     if output_format == format.PLAIN:
         return format.plain(diff)
     if output_format == format.JSON:
         return format.json(diff)
-    return format.default(diff)
+    raise ValueError('Unsupported output format!')
 
 
-def create_diff(first_file: dict, second_file: dict) -> dict:  # noqa: WPS210
+def compare(first_file: dict, second_file: dict) -> dict:  # noqa: WPS210
     """Create dict with diff between two files."""
     diff_result = {}
     common_keys = first_file.keys() & second_file.keys()
@@ -40,7 +47,7 @@ def create_diff(first_file: dict, second_file: dict) -> dict:  # noqa: WPS210
             isinstance(old_value, dict)
                 and isinstance(new_value, dict)  # noqa: W503
             ):
-            diff_result[key] = (NESTED, create_diff(
+            diff_result[key] = (NESTED, compare(
                 old_value,
                 new_value,
             ))

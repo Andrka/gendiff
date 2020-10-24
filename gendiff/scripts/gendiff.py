@@ -1,17 +1,15 @@
 #!/usr/bin/env python3
 # -*- coding:utf-8 -*-
 
-"""Package is under development."""
+"""generate differences script."""
 
-from gendiff.diff import generate_diff_for_print
-from gendiff.parser import parse_arguments
+from gendiff import cli, diff
 
 
 def main():
     """Generate diff."""
-    args = parse_arguments().parse_args()
-    print()
-    print(generate_diff_for_print(
+    args = cli.parse_arguments().parse_args()
+    print(diff.printable(
         args.first_file,
         args.second_file,
         args.format,

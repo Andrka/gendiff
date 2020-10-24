@@ -15,7 +15,7 @@ def load(path_to_file: str) -> dict:
     """Check extension and load file.
 
     Raises:
-        TypeError: unsupported file type.
+        ValueError: unsupported file type.
 
     """
     _, file_extension = os.path.splitext(path_to_file)
@@ -26,5 +26,5 @@ def load(path_to_file: str) -> dict:
         elif extension == JSON:
             load_data = json.load(data_file)
         else:
-            raise TypeError('Unsupported file type!')
+            raise ValueError('Unsupported file type!')
     return load_data
