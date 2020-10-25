@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "Andrka-gendiff"
-version = "0.8.0"
+version = "1.0.0"
 description = "Generate differences"
 authors = ["Andrka <postbox4mail@gmail.com>"]
 packages = [

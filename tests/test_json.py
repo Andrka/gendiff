@@ -2,9 +2,22 @@
 
 """Test json module."""
 
-from gendiff.format.json import json
+import json
+
+import pytest
+
+from gendiff.format.json import json as json_str
 
 
-def test_json(diff, diff_json_txt):
+@pytest.mark.parametrize(
+    'diff, output',
+    [
+        ('simple_diff', 'simple_output_json'),
+        ('nested_diff', 'nested_output_json'),
+    ],
+)
+def test_json(request, diff, output):
     """Test json function."""
-    assert json(diff) == diff_json_txt
+    diff = request.getfixturevalue(diff)
+    output = request.getfixturevalue(output)
+    assert json.loads(json_str(diff)) == output

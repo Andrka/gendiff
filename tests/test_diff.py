@@ -2,26 +2,38 @@
 
 """Test diff module."""
 
+import json
+
 import pytest
 
 from gendiff import format
 from gendiff.diff import compare, printable
 
-OLD_JSON_PATH = 'tests/fixtures/old.json'
-NEW_JSON_PATH = 'tests/fixtures/new.json'
-OLD_YAML_PATH = 'tests/fixtures/old.yml'
-NEW_YAML_PATH = 'tests/fixtures/new.yml'
+SIMPLE_OLD_JSON = 'tests/fixtures/simple_input_old.json'
+SIMPLE_NEW_JSON = 'tests/fixtures/simple_input_new.json'
+SIMPLE_OLD_YAML = 'tests/fixtures/simple_input_old.yml'
+SIMPLE_NEW_YAML = 'tests/fixtures/simple_input_new.yml'
+NESTED_OLD_JSON = 'tests/fixtures/nested_input_old.json'
+NESTED_NEW_JSON = 'tests/fixtures/nested_input_new.json'
+NESTED_OLD_YAML = 'tests/fixtures/nested_input_old.yml'
+NESTED_NEW_YAML = 'tests/fixtures/nested_input_new.yml'
 
 
 @pytest.mark.parametrize(
     'expected_result, old_file, new_file, output_format',
     [
-        ('diff_default_txt', OLD_JSON_PATH, NEW_JSON_PATH, format.DEFAULT),
-        ('diff_default_txt', OLD_YAML_PATH, NEW_YAML_PATH, format.DEFAULT),
-        ('diff_plain_txt', OLD_JSON_PATH, NEW_JSON_PATH, format.PLAIN),
-        ('diff_plain_txt', OLD_YAML_PATH, NEW_YAML_PATH, format.PLAIN),
-        ('diff_json_txt', OLD_JSON_PATH, NEW_JSON_PATH, format.JSON),
-        ('diff_json_txt', OLD_YAML_PATH, NEW_YAML_PATH, format.JSON),
+        ('simple_output_default', SIMPLE_OLD_JSON, SIMPLE_NEW_JSON, format.DEFAULT),
+        ('simple_output_default', SIMPLE_OLD_YAML, SIMPLE_NEW_YAML, format.DEFAULT),
+        ('simple_output_plain', SIMPLE_OLD_JSON, SIMPLE_NEW_JSON, format.PLAIN),
+        ('simple_output_plain', SIMPLE_OLD_YAML, SIMPLE_NEW_YAML, format.PLAIN),
+        ('simple_output_json', SIMPLE_OLD_JSON, SIMPLE_NEW_JSON, format.JSON),
+        ('simple_output_json', SIMPLE_OLD_YAML, SIMPLE_NEW_YAML, format.JSON),
+        ('nested_output_default', NESTED_OLD_JSON, NESTED_NEW_JSON, format.DEFAULT),
+        ('nested_output_default', NESTED_OLD_YAML, NESTED_NEW_YAML, format.DEFAULT),
+        ('nested_output_plain', NESTED_OLD_JSON, NESTED_NEW_JSON, format.PLAIN),
+        ('nested_output_plain', NESTED_OLD_YAML, NESTED_NEW_YAML, format.PLAIN),
+        ('nested_output_json', NESTED_OLD_JSON, NESTED_NEW_JSON, format.JSON),
+        ('nested_output_json', NESTED_OLD_YAML, NESTED_NEW_YAML, format.JSON),
     ],
 )
 def test_printable_with_format(
@@ -38,14 +50,18 @@ def test_printable_with_format(
         new_file,
         output_format,
     )
+    if output_format == format.JSON:
+        test_diff = json.loads(test_diff)
     assert test_diff == expected_diff
 
 
 @pytest.mark.parametrize(
     'expected_result, old_file, new_file',
     [
-        ('diff_default_txt', OLD_JSON_PATH, NEW_JSON_PATH),
-        ('diff_default_txt', OLD_YAML_PATH, NEW_YAML_PATH),
+        ('simple_output_default', SIMPLE_OLD_JSON, SIMPLE_NEW_JSON),
+        ('simple_output_default', SIMPLE_OLD_YAML, SIMPLE_NEW_YAML),
+        ('nested_output_default', NESTED_OLD_JSON, NESTED_NEW_JSON),
+        ('nested_output_default', NESTED_OLD_YAML, NESTED_NEW_YAML),
     ],
 )
 def test_printable_without_format(
@@ -64,15 +80,17 @@ def test_printable_without_format(
 
 
 @pytest.mark.parametrize(
-    'old_file, new_file',
+    'expected_result, old_file, new_file',
     [
-        ('old_json', 'new_json'),
-        ('old_yml', 'new_yml'),
+        ('simple_diff', 'simple_input_old_json', 'simple_input_new_json'),
+        ('simple_diff', 'simple_input_old_yaml', 'simple_input_new_yml'),
+        ('nested_diff', 'nested_input_old_json', 'nested_input_new_json'),
+        ('nested_diff', 'nested_input_old_yaml', 'nested_input_new_yml'),
     ],
 )
-def test_compare(diff, request, old_file, new_file):
+def test_compare(request, expected_result, old_file, new_file):
     """Test compare function."""
     assert compare(
         request.getfixturevalue(old_file),
         request.getfixturevalue(new_file),
-    ) == diff
+    ) == request.getfixturevalue(expected_result)
