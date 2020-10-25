@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 # -*- coding:utf-8 -*-
 
-"""generate differences script."""
+"""Generate differences script."""
 
 from gendiff import cli, diff
 
