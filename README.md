@@ -1,6 +1,6 @@
 ## Gendiff
 
-[![Maintainability](https://api.codeclimate.com/v1/badges/e72cf6c566954f9d6477/maintainability)](https://codeclimate.com/github/Andrka/gendiff/maintainability) [![Test Coverage](https://api.codeclimate.com/v1/badges/e72cf6c566954f9d6477/test_coverage)](https://codeclimate.com/github/Andrka/gendiff/test_coverage) [![Build Status](https://travis-ci.org/Andrka/gendiff.svg?branch=master)](https://travis-ci.org/Andrka/gendiff) [![Github Actions Status](https://github.com/Andrka/gendiff/workflows/Python%20CI/badge.svg)](https://github.com/Andrka/gendiff/actions)
+[![Maintainability](https://api.codeclimate.com/v1/badges/f33f6ec45a809f97fb64/maintainability)](https://codeclimate.com/github/Andrka/gendiff/maintainability) [![Test Coverage](https://api.codeclimate.com/v1/badges/f33f6ec45a809f97fb64/test_coverage)](https://codeclimate.com/github/Andrka/gendiff/test_coverage) [![Build Status](https://travis-ci.org/Andrka/gendiff.svg?branch=master)](https://travis-ci.org/Andrka/gendiff) [![Github Actions Status](https://github.com/Andrka/gendiff/workflows/Python%20CI/badge.svg)](https://github.com/Andrka/gendiff/actions)
 
 "Gendiff" is a written in Python utility, which finds differences between two files (json or yaml).
 
